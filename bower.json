@@ -1,0 +1,35 @@
+{
+  "name": "cloudoj",
+  "version": "2.0.0",
+  "homepage": "https://github.com/CloudOJ/CloudOJ",
+  "authors": [
+    "SkyZH <iSkyZH@gmail.com>"
+  ],
+  "description": "An Online Judge",
+  "main": "index.php",
+  "keywords": [
+    "CloudOJ",
+    "Online",
+    "Judge"
+  ],
+  "license": "BSD-3-Clause",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Chart.js": "chartjs#~1.0.2",
+    "MathJax": "~2.5.3",
+    "ace-builds": "git@github.com:ajaxorg/ace-builds.git#~1.2.0",
+    "angular": "angularjs#~1.4.6",
+    "bootstrap": "~3.3.5",
+    "highlightjs": "~8.8.0",
+    "jquery": "~2.1.4",
+    "jquery-pjax": "~1.9.6",
+    "json3": "~3.3.2",
+    "twemoji": "~1.4.1"
+  }
+}

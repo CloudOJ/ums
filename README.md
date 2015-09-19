@@ -1,7 +1,2 @@
-<<<<<<< HEAD
-# PhalconBootstrap
-Bootstrap for Phalcon
-=======
-# CloudOJv2
+# CloudOJ v2
 CloudOJ Version 2
->>>>>>> origin/master

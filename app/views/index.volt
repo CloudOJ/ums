@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         {{ get_title() }}
+        {{ partial("partials/plugin/cssplugin") }}
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <meta name="description" content="config.site.name, a simple online judge"/>
@@ -14,6 +15,7 @@
     </head>
 
     <body>
+        {{ partial("partials/plugin/jsplugin") }}
         <div id="pjax-container">
             {{ content() }}
         </div>

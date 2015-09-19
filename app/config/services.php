@@ -42,6 +42,9 @@ $di->set(
                 "compileAlways"     => $config->application->debug
             ]
         );
+        $volt->getCompiler()->addFunction('glyphicon', function ($resolvedArgs, $exprArgs) use ($volt) {
+            return '"<span class=\"glyphicon glyphicon-'. $exprArgs[0]["expr"]["value"] .'\" aria-hidden=\'true\'></span>"';
+        });
         return $volt;
     },
     true
@@ -116,7 +119,20 @@ $di->set(
     true
 );
 
-$di->set('config', $config);
+$di->set(
+    'config',
+    function() use ($config) {
+        if (!$config->application->debug) {
+            $config["application"]["baseUri"] = $config->application->production->baseUri;
+            $config["application"]["staticBaseUri"] = $config->application->production->staticBaseUri;
+        } else {
+            $config["application"]["baseUri"] = $config->application->development->baseUri;
+            $config["application"]["staticBaseUri"] = $config->application->development->staticBaseUri;
+        }
+        return $config;
+    },
+    true
+);
 
 $di->set(
     'flash',
@@ -169,5 +185,12 @@ $di->set(
                 "prefix"   => "forum-cache-data-"
             ]);
         }
+    }
+);
+
+$di->set(
+    'i18n',
+    function() {
+        return new \CloudOJ\i18n_zh_cn();
     }
 );

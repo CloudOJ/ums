@@ -11,7 +11,7 @@ use CloudOJ\i18n;
 
 class IndexController extends ControllerBase {
     public function initialize() {
-        $this->tag->setTitle(i18n::GetString("welcome"));
+        $this->tag->setTitle($this->i18n->title_welcome);
         parent::initialize();
     }
     public function indexAction() {

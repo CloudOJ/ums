@@ -2,3 +2,7 @@ cache/
 config.php
 app/logs/
 app/cache/
+node_modules
+bower_components
+.bowerrc
+public/lib/
