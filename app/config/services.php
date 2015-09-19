@@ -43,7 +43,7 @@ $di->set(
             ]
         );
         $volt->getCompiler()->addFunction('glyphicon', function ($resolvedArgs, $exprArgs) use ($volt) {
-            return '"<span class=\"glyphicon glyphicon-'. $exprArgs[0]["expr"]["value"] .'\" aria-hidden=\'true\'></span>"';
+            return '"<span class=\"glyphicon glyphicon-'. $exprArgs[0]["expr"]["value"] .'\" aria-hidden=\'true\'></span> "';
         });
         return $volt;
     },
@@ -190,7 +190,17 @@ $di->set(
 
 $di->set(
     'i18n',
-    function() {
-        return new \CloudOJ\i18n_zh_cn();
+    function() use ($di){
+        $request = $di->get('request');
+        $locale = $request->getQuery("locale");
+        if(!$locale) $locale = $request->getBestLanguage();
+        $locale = strtolower($locale);
+        if ($locale == "zh-cn") {
+            return new \CloudOJ\i18n_zh_cn();
+        } elseif ($locale == "en-us") {
+            return new \CloudOJ\i18n_en_us();
+        } else {
+            return new \CloudOJ\i18n_en_us();
+        }
     }
 );
