@@ -13,7 +13,7 @@ if (!isset($_GET['_url'])) {
 
 define('APP_PATH', realpath('..'));
 
-
+require APP_PATH . "/vendor/autoload.php";
 
 try {
     $di = new FactoryDefault();

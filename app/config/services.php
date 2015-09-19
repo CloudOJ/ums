@@ -51,11 +51,30 @@ $di->set(
 );
 
 $di->set(
+    'markdown',
+    function ($view, $di) use ($config) {
+        $markdown = new \CloudOJ\MarkdownAdapter($view, $di);
+        $markdown->setOptions(
+            [
+                "compiledPath"      => APP_PATH . "/app/cache/markdown/",
+                "compiledSeparator" => "_",
+                "compileAlways"     => $config->application->debug
+            ]
+        );
+        return $markdown;
+    },
+    true
+);
+
+$di->set(
     'view',
     function () use ($config) {
         $view = new View();
         $view->setViewsDir($config->application->viewsDir);
-        $view->registerEngines([".volt" => 'volt']);
+        $view->registerEngines([
+            ".volt" => 'volt',
+            ".md" => 'markdown'
+        ]);
         return $view;
     },
     true
@@ -193,7 +212,17 @@ $di->set(
     function() use ($di){
         $request = $di->get('request');
         $locale = $request->getQuery("locale");
-        if(!$locale) $locale = $request->getBestLanguage();
+        $session = $di->get('session');
+        if(!$locale) {
+            if($session->has('locale')) {
+                $locale = $session->get('locale');
+            } else {
+                $locale = $request->getBestLanguage();
+                $session->set('locale', $locale);
+            }
+        } else {
+            $session->set('locale', $locale);
+        }
         $locale = strtolower($locale);
         if ($locale == "zh-cn") {
             return new \CloudOJ\i18n_zh_cn();
@@ -202,5 +231,16 @@ $di->set(
         } else {
             return new \CloudOJ\i18n_en_us();
         }
-    }
+    },
+    true
+);
+
+$exetime = microtime(true);
+
+$di->set(
+    'exetime',
+    function() use ($exetime) {
+        return number_format(microtime(true) - $exetime, 3);
+    },
+    true
 );

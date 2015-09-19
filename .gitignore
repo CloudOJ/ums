@@ -6,3 +6,5 @@ node_modules
 bower_components
 .bowerrc
 public/lib/
+vendor/
+composer.lock

@@ -5,6 +5,7 @@ namespace CloudOJ;
 class i18n_zh_cn {
     public $locale = "zh-cn";
     public $title_welcome = "欢迎";
+    public $title_help = "帮助";
     public $navbar_home = "首页";
     public $navbar_problem = "试题";
     public $navbar_contest = "竞赛";

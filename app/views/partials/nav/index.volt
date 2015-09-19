@@ -10,7 +10,7 @@
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-main">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">
+                <li class="active"><a href="{{this.config.application.baseUri}}">
                     {{glyphicon("home")}}
                     <span class="hidden-sm">
                         {{this.i18n.navbar_home}}
