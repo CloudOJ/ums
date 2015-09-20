@@ -6,6 +6,7 @@ class i18n_zh_cn {
     public $locale = "zh-cn";
     public $title_welcome = "欢迎";
     public $title_help = "帮助";
+    public $title_home = "首页";
     public $navbar_home = "首页";
     public $navbar_problem = "试题";
     public $navbar_contest = "竞赛";
@@ -19,4 +20,5 @@ class i18n_zh_cn {
     public $footer_about = "关于";
     public $footer_feedback = "反馈";
     public $footer_term = "用户许可协议";
+    public $footer_help = "帮助";
 }

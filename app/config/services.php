@@ -156,12 +156,13 @@ $di->set(
 $di->set(
     'flash',
     function () {
-        return new Phalcon\Flash\Session([
+        $flash = new Phalcon\Flash\Session([
             'error'   => 'alert alert-danger',
             'success' => 'alert alert-success',
             'notice'  => 'alert alert-info',
             'warning' => 'alert alert-warning'
         ]);
+        return $flash;
     }
 );
 

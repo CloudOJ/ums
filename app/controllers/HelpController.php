@@ -14,11 +14,23 @@ class HelpController extends ControllerBase {
         $this->tag->setTitle($this->i18n->title_help);
         parent::initialize();
     }
-    public function indexAction() {
+    public function indexAction($filename = null) {
+        return $this->forward("help/view");
     }
+
     public function viewAction($filename = null) {
-        if($filename) {
-            $this->view->pick("help/content/{$filename}");
+        if(!$filename) {
+            $filename = "index";
         }
+        $locale = $this->i18n->locale;
+        $path = "help/content-{$locale}/{$filename}";
+        if(!file_exists(APP_PATH . "/app/views/{$path}.md")) {
+            $this->flash->error("Page not Found!");
+            return $this->forward("index/index");
+        }
+        $this->view->setVars(array(
+            "isIndex" => ($filename == "index"),
+            "path" => "help/content-{$locale}/{$filename}"
+        ));
     }
 }

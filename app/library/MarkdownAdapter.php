@@ -22,7 +22,7 @@ class MarkdownAdapter extends Engine {
     public function render($path, $params) {
         $view    = $this->_view;
         $options = $this->_options;
-        $Extra = new \ParsedownExtra();
-        $view->setContent($Extra->text(file_get_contents($path)));
+        $Extra = new ParsedownExt();
+        echo $Extra->text(file_get_contents($path));
     }
 }
