@@ -3,10 +3,12 @@
 namespace CloudOJ;
 
 class i18n_zh_cn {
+    public $lang = "zh";
     public $locale = "zh-cn";
     public $title_welcome = "欢迎";
     public $title_help = "帮助";
     public $title_home = "首页";
+    public $title_user = "用户中心";
     public $navbar_home = "首页";
     public $navbar_problem = "试题";
     public $navbar_contest = "竞赛";
@@ -21,4 +23,8 @@ class i18n_zh_cn {
     public $footer_feedback = "反馈";
     public $footer_term = "用户许可协议";
     public $footer_help = "帮助";
+    public $user_login_title = "登录";
+    public $user_username = "用户名/邮箱";
+    public $user_password = "密码";
+    public $user_signup_title = "注册";
 }

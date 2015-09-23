@@ -59,8 +59,8 @@
                 </div>
             </form>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="{{url("login")}}">{{glyphicon("log-in")}}<span class="hidden-sm">{{this.i18n.navbar_login}}</span></a></li>
-                <li><a href="{{url("register")}}">{{glyphicon("new-window")}}<span class="hidden-sm">{{this.i18n.navbar_register}}</span></a></li>
+                <li><a href="{{url("user/login")}}">{{glyphicon("log-in")}}<span class="hidden-sm">{{this.i18n.navbar_login}}</span></a></li>
+                <li><a href="{{url("user/register")}}">{{glyphicon("new-window")}}<span class="hidden-sm">{{this.i18n.navbar_register}}</span></a></li>
             </ul>
         </div>
     </div>
