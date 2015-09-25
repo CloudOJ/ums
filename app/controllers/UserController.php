@@ -25,23 +25,30 @@ class UserController extends ControllerBase {
             'groupid' => $user->groupid
         ));
     }
-
+    protected function isLoggedin() {
+        return $this->session->has('auth');
+    }
     public function loginAction() {
+        if($this->isLoggedin()) {
+            $this->flash->error($this->i18n->user_alreadyloggedin);
+            return $this->forward("index/index");
+        }
         $form = new LoginForm();
         if ($this->request->isPost()) {
-            if (!$form->isValid($_POST)) {
+            if (!$form->isValid($this->request->getPost())) {
                 foreach ($form->getMessages() as $message) {
                     $this->flash->error($message);
                 }
-            }
-            $email = $this->request->getPost('email');
-            $password = $this->request->getPost('password');
-            $user = User::findUserByName($email);
-            if ($user) {
-                if ($this->security->checkHash($password, $user->password)) {
-                    $this->_registerSession($user);
-                    $this->flash->success(sprintf($this->i18n->user_login_success, $user->username));
-                    return $this->forward('index/index');
+            } else {
+                $username = $this->request->getPost('username');
+                $password = $this->request->getPost('password');
+                $user = User::findUserByName($username);
+                if ($user) {
+                    if ($this->security->checkHash($password, $user->password)) {
+                        $this->_registerSession($user);
+                        $this->flash->success(sprintf($this->i18n->user_login_success, $user->username));
+                        return $this->forward('index/index');
+                    }
                 }
             }
             $this->flash->error($this->i18n->user_login_wrongdata);
@@ -49,6 +56,10 @@ class UserController extends ControllerBase {
         $this->view->setVar("form", $form);
     }
     public function registerAction() {
+        if($this->isLoggedin()) {
+            $this->flash->error($this->i18n->user_alreadyloggedin);
+            return $this->forward("index/index");
+        }
         $form = new RegisterForm();
         if ($this->request->isPost()) {
             $password = $this->request->getPost("password");
@@ -74,11 +85,20 @@ class UserController extends ControllerBase {
                         $this->flash->success($this->i18n->user_register_succeed);
                         $this->tag->setDefault("username", "");
                         $this->tag->setDefault("password", "");
-                        return $this->forward('user/login');
+                        return $this->forward('index/index');
                     }
                 }
             }
         }
         $this->view->setVar("form", $form);
+    }
+    public function logoutAction() {
+        if(!$this->isLoggedin()) {
+            $this->flash->error($this->i18n->user_notloggedin);
+            return $this->forward("index/index");
+        }
+        $this->flash->success($this->i18n->user_logout_succeed);
+        $this->session->remove('auth');
+        return $this->forward('index/index');
     }
 }
