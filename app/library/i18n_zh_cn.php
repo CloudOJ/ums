@@ -1,6 +1,6 @@
 <?php
 
-namespace CloudOJ;
+namespace Ums;
 
 class i18n_zh_cn {
     public $lang = "zh";

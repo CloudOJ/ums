@@ -1,6 +1,6 @@
 <?php
 
-namespace CloudOJ\Controllers;
+namespace Ums\Controllers;
 
 
 use Phalcon\Mvc\Controller;

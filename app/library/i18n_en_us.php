@@ -1,6 +1,6 @@
 <?php
 
-namespace CloudOJ;
+namespace Ums;
 
 class i18n_en_us {
     public $lang = "en";
@@ -10,11 +10,6 @@ class i18n_en_us {
     public $title_home = "Home";
     public $title_user = "UserCenter";
     public $navbar_home = "Home";
-    public $navbar_problem = "Problem";
-    public $navbar_contest = "Contest";
-    public $navbar_discuss = "Discuss";
-    public $navbar_status = "Status";
-    public $navbar_rank = "Rank";
     public $navbar_search = "Search";
     public $navbar_login = "Login";
     public $navbar_register = "Register";
@@ -24,7 +19,27 @@ class i18n_en_us {
     public $footer_term = "Terms of Service";
     public $footer_help = "Help";
     public $user_login_title = "Log In";
-    public $user_username = "Username/E-mail";
+    public $user_login_username = "Username/E-mail";
+    public $user_username = "Username";
     public $user_password = "Password";
+    public $user_email    = "E-mail";
     public $user_signup_title = "Sign Up";
+    public $user_signup_emailinvaild_same = "Sorry, The email was registered by another user.";
+    public $user_signup_usernameinvaild_same = "Sorry, The username was registered by another user.";
+    public $user_login_usernamerequired = "Username is required.";
+    public $user_login_passwordrequired = "Password is required.";
+    public $user_login_wrongdata = "Wrong Username/Email or Wrong Password.";
+    public $user_login_success = "Welcome, %s!";
+    public $user_register_usernamerequired = "Please enter your desired username.";
+    public $user_register_username_maximum = "Username must have at most %d characters.";
+    public $user_register_username_minimum = "Username must have at least %d characters.";
+    public $user_register_emailrequired    = "E-mail is required.";
+    public $user_register_emailinvaild     = "Invaild E-mail.";
+    public $user_register_passwordrequired = "Password is required.";
+    public $user_register_password_maximum = "Password must have at most %d characters.";
+    public $user_register_password_minimum = "Password must have at least %d characters.";
+    public $user_register_repeatpassword = "Confirm Password";
+    public $user_register_repeatpasswordrequired = "Password Confirmation is required.";
+    public $user_register_differentrepeatpassword = "Confirmation Password is different.";
+    public $user_register_succeed = "Thanks for sign-up! Log in to start your Advanture.";
 }

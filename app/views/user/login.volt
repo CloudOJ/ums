@@ -3,20 +3,13 @@
         <div class="page-header">
             <h1>{{this.i18n.user_login_title}}</h1>
         </div>
-        {{ form('user/login', 'role': 'form') }}
+        {{ form('user/login') }}
             <fieldset>
-                <div class="form-group">
-                    <div class="controls">
-                        {{ text_field('email', 'class': "form-control",
-                        "placeholder" : this.i18n.user_username, "required": "") }}
+                {% for element in form %}
+                    <div class="form-group">
+                        <div class="controls">{{ element }}</div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <div class="controls">
-                        {{ password_field('password', 'class': "form-control",
-                        "placeholder" : this.i18n.user_password, "required": "") }}
-                    </div>
-                </div>
+                {% endfor %}
                 <div class="form-group">
                     {{ submit_button(this.i18n.user_login_title, 'class': 'btn btn-primary btn-block') }}
                 </div>

@@ -1,2 +1,3 @@
-# CloudOJ v2
-CloudOJ Version 2
+# μms
+
+A User Management System.

@@ -1,12 +1,12 @@
 <?php
 return new \Phalcon\Config(array(
     'site' => array(
-        'name'      => 'CloudOJ',
-        'url'       => 'http://localhost/oj',
-        'project'   => 'CloudOJ',
-        'software'  => 'CloudOJ',
-        'repo'      => 'https://github.com/CloudOJ/CloudOJ',
-        'docs'      => 'https://github.com/CloudOJ/CloudOJ/wiki',
+        'name'      => 'Ums',
+        'url'       => 'http://localhost/ums',
+        'project'   => 'Ums',
+        'software'  => 'Ums',
+        'repo'      => 'https://github.com/CloudOJ/ums',
+        'docs'      => 'https://github.com/CloudOJ/ums/wiki',
     ),
     'database'    => array(
         'adapter'  => 'Mysql',
@@ -22,12 +22,13 @@ return new \Phalcon\Config(array(
         'viewsDir'       => APP_PATH . '/app/views/',
         'pluginsDir'     => APP_PATH . '/app/plugins/',
         'libraryDir'     => APP_PATH . '/app/library/',
+        'formsDir'       => APP_PATH . '/app/forms/',
         'development'    => array(
-            'staticBaseUri' => '/oj/static',
+            'staticBaseUri' => '/ums/static',
             'baseUri'       => '/'
         ),
         'production'     => array(
-            'staticBaseUri' => '/oj/static',
+            'staticBaseUri' => '/ums/static',
             'baseUri'       => '/'
         ),
         'debug'          => true

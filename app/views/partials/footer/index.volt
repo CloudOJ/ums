@@ -18,10 +18,10 @@
             </ul>
             <p>
                 {% if this.i18n.locale == "zh-cn" %}
-                {{this.config.site.name}} 由 CloudOJ v2 强力驱动。
+                {{this.config.site.name}} 由 μms 强力驱动。
                 {% endif %}
                 {% if this.i18n.locale == "en-us" %}
-                Powered by CloudOJ v2.
+                Powered by μms.
                 {% endif %}
             </p>
         </div>

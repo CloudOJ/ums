@@ -51,29 +51,12 @@ $di->set(
 );
 
 $di->set(
-    'markdown',
-    function ($view, $di) use ($config) {
-        $markdown = new \CloudOJ\MarkdownAdapter($view, $di);
-        $markdown->setOptions(
-            [
-                "compiledPath"      => APP_PATH . "/app/cache/markdown/",
-                "compiledSeparator" => "_",
-                "compileAlways"     => $config->application->debug
-            ]
-        );
-        return $markdown;
-    },
-    true
-);
-
-$di->set(
     'view',
     function () use ($config) {
         $view = new View();
         $view->setViewsDir($config->application->viewsDir);
         $view->registerEngines([
-            ".volt" => 'volt',
-            ".md" => 'markdown'
+            ".volt" => 'volt'
         ]);
         return $view;
     },
@@ -122,7 +105,7 @@ $di->set(
     'session',
     function () {
         $session = new SessionAdapter(array(
-            'uniqueId' => 'cloudoj'
+            'uniqueId' => 'ums'
         ));
         $session->start();
         return $session;
@@ -170,7 +153,7 @@ $di->set(
     'dispatcher',
     function () {
         $dispatcher = new MvcDispatcher();
-        $dispatcher->setDefaultNamespace('CloudOJ\Controllers');
+        $dispatcher->setDefaultNamespace('Ums\Controllers');
         return $dispatcher;
     },
     true
@@ -226,11 +209,11 @@ $di->set(
         }
         $locale = strtolower($locale);
         if ($locale == "zh-cn") {
-            return new \CloudOJ\i18n_zh_cn();
+            return new \Ums\i18n_zh_cn();
         } elseif ($locale == "en-us") {
-            return new \CloudOJ\i18n_en_us();
+            return new \Ums\i18n_en_us();
         } else {
-            return new \CloudOJ\i18n_en_us();
+            return new \Ums\i18n_en_us();
         }
     },
     true

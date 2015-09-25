@@ -3,13 +3,16 @@
 $modelsDir      = $config->application->modelsDir;
 $controllersDir = $config->application->controllersDir;
 $libraryDir     = $config->application->libraryDir;
+$formsDir       = $config->application->formsDir;
+
 $loader = new \Phalcon\Loader();
 
 $loader->registerNamespaces(
     array(
-       'CloudOJ\Models'        => $modelsDir,
-       'CloudOJ\Controllers'   => $controllersDir,
-       'CloudOJ'               => $libraryDir
+       'Ums\Models'        => $modelsDir,
+       'Ums\Controllers'   => $controllersDir,
+       'Ums'               => $libraryDir,
+       'Ums\Forms'         => $formsDir
     )
 );
 $loader->register();
