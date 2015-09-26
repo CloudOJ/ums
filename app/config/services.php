@@ -51,12 +51,29 @@ $di->set(
 );
 
 $di->set(
+    'markdown',
+    function ($view, $di) use ($config) {
+        $markdown = new \Ums\MarkdownAdapter($view, $di);
+        $markdown->setOptions(
+            [
+                "compiledPath"      => APP_PATH . "/app/cache/markdown/",
+                "compiledSeparator" => "_",
+                "compileAlways"     => $config->application->debug
+            ]
+        );
+        return $markdown;
+    },
+    true
+);
+
+$di->set(
     'view',
     function () use ($config) {
         $view = new View();
         $view->setViewsDir($config->application->viewsDir);
         $view->registerEngines([
-            ".volt" => 'volt'
+            ".volt" => 'volt',
+            ".md" => 'markdown'
         ]);
         return $view;
     },
@@ -225,6 +242,14 @@ $di->set(
     'exetime',
     function() use ($exetime) {
         return number_format(microtime(true) - $exetime, 3);
+    },
+    true
+);
+
+$di->set(
+    'navbar_element',
+    function() {
+        return new \Ums\NavbarElement;
     },
     true
 );

@@ -9,6 +9,7 @@ class i18n_zh_cn {
     public $title_help = "帮助";
     public $title_home = "首页";
     public $title_user = "用户中心";
+    public $title_profile = "用户信息";
     public $navbar_home = "首页";
     public $navbar_problem = "试题";
     public $navbar_contest = "竞赛";
@@ -50,4 +51,9 @@ class i18n_zh_cn {
     public $user_logout_succeed = "您已经退出登录。";
     public $user_notloggedin = "您还没有登录。";
     public $user_alreadyloggedin = "您已经登录了。";
+    public $security_csrf_error = "验证信息失效。";
+    public $user_logout = "退出登录";
+    public $user_profile = "用户信息";
+    public $user_notification = "通知";
+    public $dropdown_signedin = "以 <strong>%s</strong> 登录";
 }

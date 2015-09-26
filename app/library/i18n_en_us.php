@@ -8,7 +8,8 @@ class i18n_en_us {
     public $title_welcome = "Welcome";
     public $title_help = "Help";
     public $title_home = "Home";
-    public $title_user = "UserCenter";
+    public $title_user = "User Center";
+    public $title_profile = "Profile";
     public $navbar_home = "Home";
     public $navbar_search = "Search";
     public $navbar_login = "Login";
@@ -45,4 +46,9 @@ class i18n_en_us {
     public $user_logout_succeed = "You are logged out.";
     public $user_notloggedin = "You haven't logged in.";
     public $user_alreadyloggedin = "You've already logged in.";
+    public $security_csrf_error = "CSRF Token Error.";
+    public $user_logout = "Log Out";
+    public $user_profile = "Profile";
+    public $user_notification = "Notification";
+    public $dropdown_signedin = "Signed in as <strong>%s</strong>";
 }

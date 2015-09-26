@@ -15,8 +15,8 @@ class Userprofile extends ModelBase {
     public $avatar;
 
     public function initialize() {
-        $this->belongsTo("uid", "User", "uid", array(
-            'reusable' => true
+        $this->belongsTo("uid", "\Ums\Models\User", "uid", array(
+            'alias' => 'User'
         ));
     }
 

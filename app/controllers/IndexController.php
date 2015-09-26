@@ -15,5 +15,6 @@ class IndexController extends ControllerBase {
         parent::initialize();
     }
     public function indexAction() {
+        $this->view->setVar("viewsetting_removecontainer", "true");
     }
 }

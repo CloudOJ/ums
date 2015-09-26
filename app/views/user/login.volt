@@ -13,6 +13,7 @@
                 <div class="form-group">
                     {{ submit_button(this.i18n.user_login_title, 'class': 'btn btn-primary btn-block') }}
                 </div>
+                {{partial("partials/security/csrf")}}
             </fieldset>
         {{ endform() }}
     </div>
@@ -25,8 +26,8 @@
         <h5>立刻注册！</h5>
         <p>在 {{this.config.site.name}} 上</p>
         <ul>
-            <li>提交代码并在线查看评测结果</li>
-            <li>和好友以及其他用户自由讨论</li>
+            <li>一键登录所有世界部产品</li>
+            <li>和好友以及其他用户自由交流</li>
         </ul>
         {% endif %}
         {% if this.i18n.locale == "en-us" %}
@@ -36,7 +37,7 @@
         <h5>Sign up now!</h5>
         <p>{{this.config.site.name}} enables you:</p>
         <ul>
-            <li>To submit your code and see the result online</li>
+            <li>Log In in all products of Sekai</li>
             <li>And to keep in touch with your friends</li>
         </ul>
         {% endif %}

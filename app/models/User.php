@@ -17,7 +17,9 @@ class User extends ModelBase {
     public $groupid;
 
     public function initialize() {
-        $this->hasOne("uid", "Userprofile", "uid");
+        $this->hasOne("uid", "\Ums\Models\Userprofile", "uid", array(
+            'alias' => 'Userprofile'
+        ));
     }
     public function validation() {
         $this->validate(new UniquenessValidator(array(

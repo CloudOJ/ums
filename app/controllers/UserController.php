@@ -35,23 +35,27 @@ class UserController extends ControllerBase {
         }
         $form = new LoginForm();
         if ($this->request->isPost()) {
-            if (!$form->isValid($this->request->getPost())) {
-                foreach ($form->getMessages() as $message) {
-                    $this->flash->error($message);
-                }
-            } else {
-                $username = $this->request->getPost('username');
-                $password = $this->request->getPost('password');
-                $user = User::findUserByName($username);
-                if ($user) {
-                    if ($this->security->checkHash($password, $user->password)) {
-                        $this->_registerSession($user);
-                        $this->flash->success(sprintf($this->i18n->user_login_success, $user->username));
-                        return $this->forward('index/index');
+            if ($this->security->checkToken()) {
+                if (!$form->isValid($this->request->getPost())) {
+                    foreach ($form->getMessages() as $message) {
+                        $this->flash->error($message);
+                    }
+                } else {
+                    $username = $this->request->getPost('username');
+                    $password = $this->request->getPost('password');
+                    $user = User::findUserByName($username);
+                    if ($user) {
+                        if ($this->security->checkHash($password, $user->password)) {
+                            $this->_registerSession($user);
+                            $this->flash->success(sprintf($this->i18n->user_login_success, $user->username));
+                            return $this->forward('index/index');
+                        }
                     }
                 }
+                $this->flash->error($this->i18n->user_login_wrongdata);
+            } else {
+                $this->flash->error($this->i18n->security_csrf_error);
             }
-            $this->flash->error($this->i18n->user_login_wrongdata);
         }
         $this->view->setVar("form", $form);
     }
@@ -62,32 +66,36 @@ class UserController extends ControllerBase {
         }
         $form = new RegisterForm();
         if ($this->request->isPost()) {
-            $password = $this->request->getPost("password");
-            $repeatPassword = $this->request->getPost("repeatPassword");
-            if ($password != $repeatPassword) {
-                $this->flash->error($this->i18n->user_register_differentrepeatpassword);
-            } else {
-                $user = new User();
-                if (!$form->isValid($this->request->getPost(), $user)) {
-                    foreach ($form->getMessages() as $message) {
-                        $this->flash->error((string) $message);
-                    }
+            if ($this->security->checkToken()) {
+                $password = $this->request->getPost("password");
+                $repeatPassword = $this->request->getPost("repeatPassword");
+                if ($password != $repeatPassword) {
+                    $this->flash->error($this->i18n->user_register_differentrepeatpassword);
                 } else {
-                    $user->password = $this->security->hash($user->password);
-                    $userprofile = new Userprofile;
-                    $userprofile->avatar = Userprofile::getAvatar($user->email);
-                    $user->userprofile = $userprofile;
-                    if ($user->save() == false) {
-                        foreach ($user->getMessages() as $message) {
+                    $user = new User();
+                    if (!$form->isValid($this->request->getPost(), $user)) {
+                        foreach ($form->getMessages() as $message) {
                             $this->flash->error((string) $message);
                         }
                     } else {
-                        $this->flash->success($this->i18n->user_register_succeed);
-                        $this->tag->setDefault("username", "");
-                        $this->tag->setDefault("password", "");
-                        return $this->forward('index/index');
+                        $user->password = $this->security->hash($user->password);
+                        $userprofile = new Userprofile;
+                        $userprofile->avatar = Userprofile::getAvatar($user->email);
+                        $user->userprofile = $userprofile;
+                        if ($user->save() == false) {
+                            foreach ($user->getMessages() as $message) {
+                                $this->flash->error((string) $message);
+                            }
+                        } else {
+                            $this->flash->success($this->i18n->user_register_succeed);
+                            $this->tag->setDefault("username", "");
+                            $this->tag->setDefault("password", "");
+                            return $this->forward('index/index');
+                        }
                     }
                 }
+            } else {
+                $this->flash->error($this->i18n->security_csrf_error);
             }
         }
         $this->view->setVar("form", $form);
