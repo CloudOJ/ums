@@ -8,7 +8,7 @@ use Phalcon\Mvc\View;
 
 class ControllerBase extends Controller {
     protected function initialize() {
-        $this->tag->prependTitle($this->config["site"]["name"] . '::');
+        $this->tag->prependTitle($this->i18n->site_name . '::');
         $this->view->setTemplateAfter('main');
 
         if($this->request->isAjax()) {

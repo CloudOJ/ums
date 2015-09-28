@@ -14,7 +14,7 @@
         <meta name="robots" content="index,follow"/>
     </head>
 
-    <body lang="{{this.i18n.lang}}">
+    <body lang="{{i18n.lang}}">
         {{ partial("partials/plugin/jsplugin") }}
         <div id="pjax-container">
             {{ content() }}

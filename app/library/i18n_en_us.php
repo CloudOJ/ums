@@ -3,6 +3,7 @@
 namespace Ums;
 
 class i18n_en_us {
+    public $site_name = "Sekai User Center";
     public $lang = "en";
     public $locale = "en-us";
     public $title_welcome = "Welcome";

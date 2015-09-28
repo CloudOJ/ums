@@ -1,5 +1,5 @@
 <div class="page-header">
-    <h1>{{this.i18n.user_signup_title}}</h1>
+    <h1>{{i18n.user_signup_title}}</h1>
 </div>
 
 {{ form('user/register') }}
@@ -10,7 +10,7 @@
             </div>
         {% endfor %}
         <div class="form-group">
-            {{ submit_button(this.i18n.user_signup_title, 'class': 'btn btn-primary btn-block') }}
+            {{ submit_button(i18n.user_signup_title, 'class': 'btn btn-primary btn-block') }}
         </div>
         {{partial("partials/security/csrf")}}
         <div class="row">
