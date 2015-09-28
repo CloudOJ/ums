@@ -7,7 +7,7 @@ use Phalcon\Mvc\View;
 use Phalcon\Db\RawValue;
 use Phalcon\Mvc\Model\Query;
 
-use CloudOJ\i18n;
+use Ums\i18n;
 
 class HelpController extends ControllerBase {
     public function initialize() {
