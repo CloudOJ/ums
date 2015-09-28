@@ -1,1 +1,1 @@
-{{ stylesheet_link(static_url("bootstrap/dist/css/bootstrap.css")) }}
+{{ stylesheet_link("bootstrap/dist/css/bootstrap.css") }}
