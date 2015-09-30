@@ -1,7 +1,8 @@
 # μms Database
 
-
+# -----------------
 # Create User Table
+# -----------------
 
 CREATE TABLE `user` (
     uid int(11) AUTO_INCREMENT NOT null,
@@ -32,4 +33,17 @@ CREATE TABLE `userlog` (
 
     PRIMARY KEY (uid),
     INDEX log(uid, type)
+) DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+# Update
+
+# ------------------
+# Create Token Table
+# ------------------
+
+CREATE TABLE `usertoken` (
+    tokenid int(11) NOT null AUTO_INCREMENT,
+    PRIMARY KEY (tokenid),
+    authdata BLOB,
+    expire_at DATETIME
 ) DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;

@@ -11,6 +11,7 @@ use Ums\Forms\LoginForm;
 use Ums\Forms\RegisterForm;
 use Ums\Models\User;
 use Ums\Models\Userprofile;
+use Ums\Models\Usertoken;
 
 class UserController extends ControllerBase {
     public function initialize() {
@@ -24,6 +25,30 @@ class UserController extends ControllerBase {
             'name' => $user->username,
             'groupid' => $user->groupid
         ));
+    }
+    protected function getSyncLogin($sessionData) {
+        $ret = "<script>";
+        foreach ($this->config->ums as $site) {
+            $token = new Usertoken;
+            $token->authdata = $sessionData;
+            if ($token->save() == false) {
+                foreach ($token->getMessages() as $message) {
+                    $this->flash->error((string) $message);
+                }
+            } else {
+                $ret .= sprintf("$.ajax({url:\"%s/saveAuth/%s/\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri, $token->tokenid);
+            }
+        }
+        $ret .= "</script>";
+        return $ret;
+    }
+    protected function getSyncLogout() {
+        $ret = "<script>";
+        foreach ($this->config->ums as $site) {
+            $ret .= sprintf("$.ajax({url:\"%s/removeAuth/%s/\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri, $token->tokenid);
+        }
+        $ret .= "</script>";
+        return $ret;
     }
     protected function isLoggedin() {
         return $this->session->has('auth');
@@ -47,7 +72,11 @@ class UserController extends ControllerBase {
                     if ($user) {
                         if ($this->security->checkHash($password, $user->password)) {
                             $this->_registerSession($user);
-                            $this->flash->success(sprintf($this->i18n->user_login_success, $user->username));
+                            $ser_authData = serialize($this->session->get("auth"));
+                            if($this->request->getPost('remember-me')) {
+                                $this->cookies->set('remember-me', $ser_authData, time() + 7 * 86400);
+                            }
+                            $this->flash->success(sprintf($this->i18n->user_login_success, $user->username) . $this->getSyncLogin($ser_authData));
                             return $this->forward('index/index');
                         }
                     }
@@ -105,8 +134,11 @@ class UserController extends ControllerBase {
             $this->flash->error($this->i18n->user_notloggedin);
             return $this->forward("index/index");
         }
-        $this->flash->success($this->i18n->user_logout_succeed);
+        $this->flash->success($this->i18n->user_logout_succeed . $this->getSyncLogout());
         $this->session->remove('auth');
+        if($this->cookies->has('remember-me')) {
+            $this->cookies->get('remember-me')->delete();
+        }
         return $this->forward('index/index');
     }
 }

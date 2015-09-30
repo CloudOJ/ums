@@ -5,4 +5,10 @@
             {{i18n.navbar_home}}
         </span>
     </a></li>
+    {% for umssite in config.ums %}
+    <li><a href="{{umssite.baseUri}}">
+        {{glyphicon("chevron-left")}}
+        <span>{{i18n.navbar_return}} {{umssite.name}}</span>
+    </a></li>
+    {% endfor %}
 </ul>

@@ -16,6 +16,7 @@ class i18n_en_us {
     public $navbar_login = "Login";
     public $navbar_register = "Register";
     public $navbar_search_textarea = "Search %s";
+    public $navbar_return = "Return";
     public $footer_about = "About";
     public $footer_feedback = "Feedback";
     public $footer_term = "Terms of Service";
@@ -32,6 +33,7 @@ class i18n_en_us {
     public $user_login_passwordrequired = "Password is required.";
     public $user_login_wrongdata = "Wrong Username/Email or Wrong Password.";
     public $user_login_success = "Welcome, %s!";
+    public $user_login_remember_me = "Remember me";
     public $user_register_usernamerequired = "Please enter your desired username.";
     public $user_register_username_maximum = "Username must have at most %d characters.";
     public $user_register_username_minimum = "Username must have at least %d characters.";
@@ -47,6 +49,7 @@ class i18n_en_us {
     public $user_logout_succeed = "You are logged out.";
     public $user_notloggedin = "You haven't logged in.";
     public $user_alreadyloggedin = "You've already logged in.";
+    public $user_login_auto_success = "You're automatically logged in.";
     public $security_csrf_error = "CSRF Token Error.";
     public $user_logout = "Log Out";
     public $user_profile = "Profile";

@@ -26,11 +26,10 @@ try {
 
     echo $application->handle()->getContent();
 } catch (Exception $e) {
-    echo $e->getMessage();
     $logger = new Logger(APP_PATH . '/app/logs/error.log');
     $logger->error($e->getMessage());
     $logger->error($e->getTraceAsString());
     $response = new Response();
-    //$response->redirect('/505.html');
+    $response->redirect('/505.html');
     $response->send();
 }

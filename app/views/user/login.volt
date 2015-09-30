@@ -10,6 +10,12 @@
                         <div class="controls">{{ element }}</div>
                     </div>
                 {% endfor %}
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="remember-me" />
+                        {{i18n.user_login_remember_me}}
+                    </label>
+                </div>
                 <div class="form-group">
                     {{ submit_button(i18n.user_login_title, 'class': 'btn btn-primary btn-block') }}
                 </div>

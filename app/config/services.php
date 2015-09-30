@@ -18,7 +18,7 @@ use Phalcon\Crypt;
 
 $di->set('crypt', function () use ($config) {
     $crypt = new Crypt();
-    $crypt->setKey($config->crypt->key);
+    $crypt->setKey($config->application->crypt->key);
     return $crypt;
 });
 
