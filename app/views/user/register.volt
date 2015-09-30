@@ -15,7 +15,14 @@
         {{partial("partials/security/csrf")}}
         <div class="row">
             <div class="col-xs-12">
-                <p class="help-block">By signing up, you accept terms of use and privacy policy.</p>
+                <p class="help-block">
+                    {% if i18n.locale is "en-us"%}
+                    By signing up, you accept terms of service and privacy policy.
+                    {% endif %}
+                    {% if i18n.locale is "zh-cn" %}
+                    注册即表示您同意《用户许可协议》和《隐私保护协议》。
+                    {% endif %}
+                </p>
             </div>
         </div>
     </fieldset>

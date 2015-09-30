@@ -3,7 +3,7 @@
         <div class="page-header">
             <h1>{{i18n.user_login_title}}</h1>
         </div>
-        {{ form('user/login') }}
+        {{ form('user/login/') }}
             <fieldset>
                 {% for element in form %}
                     <div class="form-group">
@@ -24,7 +24,7 @@
             <h1>还没有帐号？</h1>
         </div>
         <h5>立刻注册！</h5>
-        <p>在 {{this.config.site.name}} 上</p>
+        <p>在 {{i18n.site_name}} 上</p>
         <ul>
             <li>一键登录所有世界部产品</li>
             <li>和好友以及其他用户自由交流</li>
@@ -35,7 +35,7 @@
             <h1>Don't have an account yet?</h1>
         </div>
         <h5>Sign up now!</h5>
-        <p>{{this.config.site.name}} enables you:</p>
+        <p>{{i18n.site_name}} enables you:</p>
         <ul>
             <li>Log In in all products of Sekai</li>
             <li>And to keep in touch with your friends</li>

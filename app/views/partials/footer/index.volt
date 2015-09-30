@@ -10,15 +10,15 @@
                 <li>{{ link_to('help', i18n.footer_help) }}</li>
 
                 {% if i18n.locale == "zh-cn" %}
-                    <li><a href="?locale=en-us">English</a></li>
+                    <li><a class="text-danger" href="?locale=en-us">English</a></li>
                 {% endif %}
                 {% if i18n.locale == "en-us" %}
-                    <li><a href="?locale=zh-cn">中文</a></li>
+                    <li><a class="text-danger" href="?locale=zh-cn">中文</a></li>
                 {% endif %}
             </ul>
             <p>
                 {% if i18n.locale == "zh-cn" %}
-                {{this.config.site.name}} 由 μms 强力驱动。
+                {{i18n.site_name}} 由 μms 强力驱动。
                 {% endif %}
                 {% if i18n.locale == "en-us" %}
                 Powered by μms.
