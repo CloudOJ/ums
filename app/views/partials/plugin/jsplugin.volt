@@ -1,11 +1,9 @@
+{% if config.application.debug %}
 {{ javascript_include("jquery/dist/jquery.min.js") }}
 {{ javascript_include("bootstrap/dist/js/bootstrap.min.js") }}
-{{ javascript_include("json3/lib/json3.min.js") }}
-{{ javascript_include("MathJax/MathJax.js?config=TeX-AMS_HTML") }}
-{{ javascript_include("highlightjs/highlight.pack.min.js") }}
-{{ javascript_include("twemoji/twemoji.min.js") }}
-{{ javascript_include("angular/angular.min.js") }}
-{{ javascript_include("Chart.js/Chart.min.js") }}
-{{ javascript_include("jquery-pjax/jquery.pjax.js") }}
-{{ javascript_include("ace-builds/src-min/ace.js") }}
+{% else %}
+{{ javascript_include("//cdn.bootcss.com/jquery/2.1.4/jquery.min.js") }}
+{{ javascript_include("//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.js") }}
+{% endif %}
+
 <script type="text/javascript" src="{{url("js/utils.js")}}"></script>
