@@ -2,6 +2,8 @@
     <h1>{{i18n.user_signup_title}}</h1>
 </div>
 
+{{ partial("partials/plugin/captcha_plugin") }}
+
 {{ form('user/register') }}
     <fieldset>
         {% for element in form %}
