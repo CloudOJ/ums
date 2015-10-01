@@ -1,1 +1,1 @@
-# Terms of Service
+# Terms of Service {#help_title}

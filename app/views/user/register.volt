@@ -17,10 +17,12 @@
             <div class="col-xs-12">
                 <p class="help-block">
                     {% if i18n.locale is "en-us"%}
-                    By signing up, you accept terms of service and privacy policy.
+                    By signing up, you accept {{link_to("help/view/term", "Terms of Service")}}
+                    and {{link_to("help/view/privacy", "Privacy Policy")}}.
                     {% endif %}
                     {% if i18n.locale is "zh-cn" %}
-                    注册即表示您同意《用户许可协议》和《隐私保护协议》。
+                    注册即表示您同意 {{link_to("help/view/term", "《用户许可协议》")}} 和
+                     {{link_to("help/view/privacy", "《隐私保护协议》")}}。
                     {% endif %}
                 </p>
             </div>

@@ -6,11 +6,11 @@
         {{ partial("partials/plugin/cssplugin") }}
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-        <meta name="description" content="config.site.name, a simple online judge"/>
+        <meta name="description" content="{{this.config.site.name}}, a user management system."/>
         <meta name="author" content="SkyZH, CloudOJ Team"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="renderer" content="webkit"/>
-        <meta name="keywords" content="{{config.site.name}}, OI, NOI, NOIP, OJ, Online Judge" />
+        <meta name="keywords" content="{{this.config.site.name}}, User Management, User Center" />
         <meta name="robots" content="index,follow"/>
     </head>
 
