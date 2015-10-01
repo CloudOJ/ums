@@ -26,7 +26,7 @@ class UserController extends ControllerBase {
             'groupid' => $user->groupid
         ));
     }
-    protected function getSyncLogin($sessionData) {
+    protected function getSyncLogin($sessionData, $remember = false) {
         $ret = "<script>";
         foreach ($this->config->ums as $site) {
             $token = new Usertoken;
@@ -36,7 +36,7 @@ class UserController extends ControllerBase {
                     $this->flash->error((string) $message);
                 }
             } else {
-                $ret .= sprintf("$.ajax({url:\"%s/saveAuth/%s/\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri, $token->tokenid);
+                $ret .= sprintf("$.ajax({url:\"%s/saveAuth/%s/%s\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri, $token->tokenid, strval($remember));
             }
         }
         $ret .= "</script>";
@@ -76,7 +76,7 @@ class UserController extends ControllerBase {
                             if($this->request->getPost('remember-me')) {
                                 $this->cookies->set('remember-me', $ser_authData, time() + 7 * 86400);
                             }
-                            $this->flash->success(sprintf($this->i18n->user_login_success, $user->username) . $this->getSyncLogin($ser_authData));
+                            $this->flash->success(sprintf($this->i18n->user_login_success, $user->username) . $this->getSyncLogin($ser_authData, ($this->request->getPost('remember-me') != null) ? true : false));
                             return $this->forward('index/index');
                         }
                     }

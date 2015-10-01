@@ -33,7 +33,7 @@ class i18n_zh_cn {
     public $user_login_passwordrequired = "请填写密码。";
     public $user_login_wrongdata = "用户名、邮箱或密码错误。";
     public $user_login_success = "%s, 欢迎您!";
-    public $user_login_remember_me = "永久免登录";
+    public $user_login_remember_me = "七天内免登录";
     public $user_register_usernamerequired = "请输入用户名。";
     public $user_register_username_maximum = "用户名最多 %d 个字符。";
     public $user_register_username_minimum = "用户名最少 %d 个字符。";
@@ -49,7 +49,7 @@ class i18n_zh_cn {
     public $user_logout_succeed = "您已经退出登录。";
     public $user_notloggedin = "您还没有登录。";
     public $user_alreadyloggedin = "您已经登录了。";
-    public $user_login_auto_success = "您已经自动登录了。";
+    public $user_login_auto_success = "欢迎回来!";
     public $security_csrf_error = "验证信息失效。";
     public $user_logout = "退出登录";
     public $user_profile = "用户信息";
