@@ -8,6 +8,8 @@ use Phalcon\Forms\Element\Password;
 use Phalcon\Validation\Validator\PresenceOf;
 use Phalcon\Validation\Validator\Email;
 use Phalcon\Validation\Validator\StringLength;
+use Phalcon\Validation\Validator\Confirmation;
+use Phalcon\Validation\Validator\Regex as RegexValidator;
 
 class RegisterForm extends Form {
     const Setting_Username_Maximum_Length = 20;
@@ -31,6 +33,10 @@ class RegisterForm extends Form {
                 'min' => RegisterForm::Setting_Username_Minimum_Length,
                 'messageMaximum' => sprintf($this->i18n->user_register_username_maximum, RegisterForm::Setting_Username_Maximum_Length),
                 'messageMinimum' => sprintf($this->i18n->user_register_username_minimum, RegisterForm::Setting_Username_Minimum_Length)
+            )),
+            new RegexValidator(array(
+                'pattern' => '/^[a-zA-Z0-9_.-]+$/',
+                'message' => $this->i18n->user_register_usernamepattern
             ))
         ));
         $this->add($username);
@@ -65,6 +71,10 @@ class RegisterForm extends Form {
                 'min' => RegisterForm::Setting_Password_Minimum_Length,
                 'messageMaximum' => sprintf($this->i18n->user_register_password_maximum, RegisterForm::Setting_Password_Maximum_Length),
                 'messageMinimum' => sprintf($this->i18n->user_register_password_minimum, RegisterForm::Setting_Password_Minimum_Length)
+            )),
+            new RegexValidator(array(
+                'pattern' => '/^[a-zA-Z0-9_.-~!@#$%^&*()=+`<>?.:;\'\"]+$/',
+                'message' => $this->i18n->user_register_passwordpattern
             ))
         ));
         $this->add($password);
@@ -77,6 +87,10 @@ class RegisterForm extends Form {
         $repeatPassword->addValidators(array(
             new PresenceOf(array(
                 'message' => $this->i18n->user_register_repeatpasswordrequired
+            )),
+            new Confirmation(array(
+               'message' => $this->i18n->user_register_differentrepeatpassword,
+               'with' => 'password'
             ))
         ));
         $this->add($repeatPassword);

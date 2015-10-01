@@ -96,31 +96,25 @@ class UserController extends ControllerBase {
         $form = new RegisterForm();
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
-                $password = $this->request->getPost("password");
-                $repeatPassword = $this->request->getPost("repeatPassword");
-                if ($password != $repeatPassword) {
-                    $this->flash->error($this->i18n->user_register_differentrepeatpassword);
+                $user = new User();
+                if (!$form->isValid($this->request->getPost(), $user)) {
+                    foreach ($form->getMessages() as $message) {
+                        $this->flash->error((string) $message);
+                    }
                 } else {
-                    $user = new User();
-                    if (!$form->isValid($this->request->getPost(), $user)) {
-                        foreach ($form->getMessages() as $message) {
+                    $user->password = $this->security->hash($user->password);
+                    $userprofile = new Userprofile;
+                    $userprofile->avatar = Userprofile::getAvatar($user->email);
+                    $user->userprofile = $userprofile;
+                    if ($user->save() == false) {
+                        foreach ($user->getMessages() as $message) {
                             $this->flash->error((string) $message);
                         }
                     } else {
-                        $user->password = $this->security->hash($user->password);
-                        $userprofile = new Userprofile;
-                        $userprofile->avatar = Userprofile::getAvatar($user->email);
-                        $user->userprofile = $userprofile;
-                        if ($user->save() == false) {
-                            foreach ($user->getMessages() as $message) {
-                                $this->flash->error((string) $message);
-                            }
-                        } else {
-                            $this->flash->success($this->i18n->user_register_succeed);
-                            $this->tag->setDefault("username", "");
-                            $this->tag->setDefault("password", "");
-                            return $this->forward('index/index');
-                        }
+                        $this->flash->success($this->i18n->user_register_succeed);
+                        $this->tag->setDefault("username", "");
+                        $this->tag->setDefault("password", "");
+                        return $this->forward('index/index');
                     }
                 }
             } else {

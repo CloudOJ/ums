@@ -40,12 +40,14 @@ class i18n_zh_cn {
     public $user_register_emailrequired    = "请填写邮箱。";
     public $user_register_emailinvaild     = "邮箱格式错误。";
     public $user_register_passwordrequired = "请填写密码。";
-    public $user_register_password_maximum = "密码最多 %d ";
-    public $user_register_password_minimum = "密码最少 %d .";
+    public $user_register_password_maximum = "密码最多 %d 个字符。";
+    public $user_register_password_minimum = "密码最少 %d 个字符。";
     public $user_register_repeatpassword = "确认密码";
     public $user_register_repeatpasswordrequired = "请再次确认密码。";
     public $user_register_differentrepeatpassword = "重复密码不相同。";
     public $user_register_succeed = "感谢您注册！登录开始全新旅程。";
+    public $user_register_passwordpattern = "密码中含有非法字符。";
+    public $user_register_usernamepattern = "用户名中含有非法字符。";
     public $user_logout_succeed = "您已经退出登录。";
     public $user_notloggedin = "您还没有登录。";
     public $user_alreadyloggedin = "您已经登录了。";
