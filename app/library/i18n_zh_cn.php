@@ -48,6 +48,7 @@ class i18n_zh_cn {
     public $user_register_succeed = "感谢您注册！登录开始全新旅程。";
     public $user_register_passwordpattern = "密码中含有非法字符。";
     public $user_register_usernamepattern = "用户名中含有非法字符。";
+    public $user_register_captcha_error = "请填写验证码。";
     public $user_logout_succeed = "您已经退出登录。";
     public $user_notloggedin = "您还没有登录。";
     public $user_alreadyloggedin = "您已经登录了。";

@@ -9,10 +9,11 @@
                 <div class="controls">{{ element }}</div>
             </div>
         {% endfor %}
+        {{ partial("partials/captcha/recaptcha") }}
         <div class="form-group">
             {{ submit_button(i18n.user_signup_title, 'class': 'btn btn-primary btn-block') }}
         </div>
-        {{partial("partials/security/csrf")}}
+        {{ partial("partials/security/csrf") }}
         <div class="row">
             <div class="col-xs-12">
                 <p class="help-block">

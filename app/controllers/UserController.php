@@ -88,6 +88,42 @@ class UserController extends ControllerBase {
         }
         $this->view->setVar("form", $form);
     }
+    protected function __verifyCaptcha($token) {
+        $url = "https://www.google.com/recaptcha/api/siteverify";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+            'secret' => $this->config->recaptcha->secretkey,
+            'response' => $token
+        ));
+        $output = curl_exec($ch);
+        curl_close($ch);
+        return $output;
+    }
+    protected function checkCaptcha() {
+        if($this->config->recaptcha->enabled) {
+            if($this->request->hasPost("g-recaptcha-response")) {
+                $verifyStatus = $this->__verifyCaptcha($this->request->getPost("g-recaptcha-response"));
+                if($verifyStatus) {
+                    $json_status = json_decode($verifyStatus);
+                    if($json_status->success == true) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
+    }
     public function registerAction() {
         if($this->isLoggedin()) {
             $this->flash->error($this->i18n->user_alreadyloggedin);
@@ -96,26 +132,30 @@ class UserController extends ControllerBase {
         $form = new RegisterForm();
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
-                $user = new User();
-                if (!$form->isValid($this->request->getPost(), $user)) {
-                    foreach ($form->getMessages() as $message) {
-                        $this->flash->error((string) $message);
-                    }
-                } else {
-                    $user->password = $this->security->hash($user->password);
-                    $userprofile = new Userprofile;
-                    $userprofile->avatar = Userprofile::getAvatar($user->email);
-                    $user->userprofile = $userprofile;
-                    if ($user->save() == false) {
-                        foreach ($user->getMessages() as $message) {
+                if($this->checkCaptcha()) {
+                    $user = new User();
+                    if (!$form->isValid($this->request->getPost(), $user)) {
+                        foreach ($form->getMessages() as $message) {
                             $this->flash->error((string) $message);
                         }
                     } else {
-                        $this->flash->success($this->i18n->user_register_succeed);
-                        $this->tag->setDefault("username", "");
-                        $this->tag->setDefault("password", "");
-                        return $this->forward('index/index');
+                        $user->password = $this->security->hash($user->password);
+                        $userprofile = new Userprofile;
+                        $userprofile->avatar = Userprofile::getAvatar($user->email);
+                        $user->userprofile = $userprofile;
+                        if ($user->save() == false) {
+                            foreach ($user->getMessages() as $message) {
+                                $this->flash->error((string) $message);
+                            }
+                        } else {
+                            $this->flash->success($this->i18n->user_register_succeed);
+                            $this->tag->setDefault("username", "");
+                            $this->tag->setDefault("password", "");
+                            return $this->forward('index/index');
+                        }
                     }
+                } else {
+                    $this->flash->error($this->i18n->user_register_captcha_error);
                 }
             } else {
                 $this->flash->error($this->i18n->security_csrf_error);

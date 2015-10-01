@@ -48,6 +48,7 @@ class i18n_en_us {
     public $user_register_succeed = "Thanks for sign-up! Log in to start your Advanture.";
     public $user_register_passwordpattern = "Invaild characters present in Password.";
     public $user_register_usernamepattern = "Invaild characters present in Username.";
+    public $user_register_captcha_error = "Please solve reCAPTCHA";
     public $user_logout_succeed = "You are logged out.";
     public $user_notloggedin = "You haven't logged in.";
     public $user_alreadyloggedin = "You've already logged in.";
