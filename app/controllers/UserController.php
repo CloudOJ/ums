@@ -132,31 +132,31 @@ class UserController extends ControllerBase {
         $form = new RegisterForm();
         if ($this->request->isPost()) {
             if ($this->security->checkToken()) {
-                if($this->checkCaptcha()) {
                     $user = new User();
                     if (!$form->isValid($this->request->getPost(), $user)) {
                         foreach ($form->getMessages() as $message) {
                             $this->flash->error((string) $message);
                         }
                     } else {
-                        $user->password = $this->security->hash($user->password);
-                        $userprofile = new Userprofile;
-                        $userprofile->avatar = Userprofile::getAvatar($user->email);
-                        $user->userprofile = $userprofile;
-                        if ($user->save() == false) {
-                            foreach ($user->getMessages() as $message) {
-                                $this->flash->error((string) $message);
+                        if($this->checkCaptcha()) {
+                            $user->password = $this->security->hash($user->password);
+                            $userprofile = new Userprofile;
+                            $userprofile->avatar = Userprofile::getAvatar($user->email);
+                            $user->userprofile = $userprofile;
+                            if ($user->save() == false) {
+                                foreach ($user->getMessages() as $message) {
+                                    $this->flash->error((string) $message);
+                                }
+                            } else {
+                                $this->flash->success($this->i18n->user_register_succeed);
+                                $this->tag->setDefault("username", "");
+                                $this->tag->setDefault("password", "");
+                                return $this->forward('index/index');
                             }
                         } else {
-                            $this->flash->success($this->i18n->user_register_succeed);
-                            $this->tag->setDefault("username", "");
-                            $this->tag->setDefault("password", "");
-                            return $this->forward('index/index');
+                            $this->flash->error($this->i18n->user_register_captcha_error);
                         }
                     }
-                } else {
-                    $this->flash->error($this->i18n->user_register_captcha_error);
-                }
             } else {
                 $this->flash->error($this->i18n->security_csrf_error);
             }
