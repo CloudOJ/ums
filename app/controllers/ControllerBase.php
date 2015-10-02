@@ -19,7 +19,21 @@ class ControllerBase extends Controller {
             $this->session->set("cookie-checked", true);
         }
     }
+    protected function _checkSecure() {
+        if($this->config->application->secure) {
+            if($this->request->isSecureRequest()) {
+                return;
+            } else {
+                $response = new \Phalcon\HTTP\Response();
+                $response->redirect("https://" . $this->request->getHttpHost() . $this->request->getURI(), true);
+                $response->send();
+                exit;
+            }
+        }
+    }
     protected function initialize() {
+        $this->_checkSecure();
+
         $this->tag->prependTitle($this->i18n->site_name . '::');
         $this->view->setTemplateAfter('main');
 

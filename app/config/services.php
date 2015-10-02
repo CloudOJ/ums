@@ -15,6 +15,7 @@ use Phalcon\Cache\Frontend\None as FrontendNone;
 use Phalcon\Cache\Backend\Memory as MemoryBackend;
 use Phalcon\Cache\Frontend\Output as FrontendOutput;
 use Phalcon\Crypt;
+use Phalcon\Http\Response\Cookies;
 
 $di->set('crypt', function () use ($config) {
     $crypt = new Crypt();

@@ -74,7 +74,7 @@ class UserController extends ControllerBase {
                             $this->_registerSession($user);
                             $ser_authData = serialize($this->session->get("auth"));
                             if($this->request->getPost('remember-me')) {
-                                $this->cookies->set('remember-me', $ser_authData, time() + 7 * 86400);
+                                $this->cookies->set('remember-me', $ser_authData, time() + 7 * 86400, "/", $this->config->application->secure);
                             }
                             $this->flash->success(sprintf($this->i18n->user_login_success, $user->username) . $this->getSyncLogin($ser_authData, ($this->request->getPost('remember-me') != null) ? true : false));
                             return $this->forward('index/index');
