@@ -1,7 +1,7 @@
 <ul class="nav navbar-nav navbar-right">
     <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img class='img-rounded' width='17px' height='17px' src='{{ url("profile/avatar/" ~ this.session.get("auth")["id"]) }}'></img><span class="caret"></span>
+            <img class='img-circle ums-avatar' width='24px' height='24px' src='{{ url("profile/avatar/" ~ this.session.get("auth")["id"]) }}'></img><span class="caret"></span>
         </a>
         <ul class="dropdown-menu">
             <li class="disabled">
@@ -19,3 +19,10 @@
         </ul>
     </li>
 </ul>
+
+<style>
+.ums-avatar {
+    position: relative;
+    margin-top: -8px;
+}
+</style>

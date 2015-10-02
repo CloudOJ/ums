@@ -4,10 +4,12 @@
 
 ## 目录
 
-### 用户
+### 登录、注册与使用
 
-* [用户管理](/help/view/user)
+#### [隐私保护协议](/help/view/privacy)
+#### [用户许可协议](/help/view/terms)
 
-### 管理员
+### 关于
 
-### 开发者
+#### [关于 μms](/help/view/about)
+#### [反馈](/help/view/feedback)

@@ -3,7 +3,7 @@
 namespace Ums;
 
 class i18n_zh_cn {
-    public $site_name = "世界部用户中心";
+    public $site_name = "μms";
     public $lang = "zh";
     public $locale = "zh-cn";
     public $title_welcome = "欢迎";

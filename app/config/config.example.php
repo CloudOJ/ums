@@ -1,8 +1,9 @@
 <?php
 return new \Phalcon\Config(array(
     'site' => array(
-        'name'      => 'Ums',
-        'url'       => 'http://localhost/ums',
+        'name'      => '<your site name>',
+        //NOTE: you still need to change site_name in i18n files.
+        'url'       => 'http://ums.localhost',
         'project'   => 'Ums',
         'software'  => 'Ums',
         'repo'      => 'https://github.com/CloudOJ/ums',
@@ -10,10 +11,10 @@ return new \Phalcon\Config(array(
     ),
     'database'    => array(
         'adapter'  => 'Mysql',
-        'host'     => 'localhost',
-        'username' => '',
-        'password' => '',
-        'dbname'   => '',
+        'host'     => '<your sql host>',
+        'username' => '<your sql username>',
+        'password' => '<your sql password>',
+        'dbname'   => '<your db name>',
         'charset'  => 'utf8'
     ),
     'application' => array(
@@ -24,13 +25,30 @@ return new \Phalcon\Config(array(
         'libraryDir'     => APP_PATH . '/app/library/',
         'formsDir'       => APP_PATH . '/app/forms/',
         'development'    => array(
-            'staticBaseUri' => '/ums/static',
+            'staticBaseUri' => '//bower.localhost/',
             'baseUri'       => '/'
         ),
         'production'     => array(
             'staticBaseUri' => '/ums/static',
             'baseUri'       => '/'
         ),
-        'debug'          => true
+        'debug'          => true,
+        'crypt' => array(
+            'key' => '<your cookie crypt key>'
+        )
+    ),
+    'ums' => array(
+        array(
+            'id' => 1,
+            'name' => 'Sekai | 世界部',
+            'key' => '<your ums app key>',
+            'baseUri' => '<baseUri>',
+            'umsUri' =>  '<baseUri>/ums'
+        )
+    ),
+    'recaptcha' => array(
+        'enabled' => true,
+        'sitekey'  => '<your nocaptcha site key>',
+        'secretkey' => '<your nocaptcha secret key>'
     )
 ));
