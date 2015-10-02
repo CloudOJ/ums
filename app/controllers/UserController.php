@@ -45,7 +45,7 @@ class UserController extends ControllerBase {
     protected function getSyncLogout() {
         $ret = "<script>";
         foreach ($this->config->ums as $site) {
-            $ret .= sprintf("$.ajax({url:\"%s/removeAuth/%s/\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri, $token->tokenid);
+            $ret .= sprintf("$.ajax({url:\"%s/removeAuth/\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri);
         }
         $ret .= "</script>";
         return $ret;

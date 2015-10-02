@@ -17,10 +17,12 @@ class ApiController extends ControllerBase {
         $this->response->setHeader("Content-Type", "application/json;charset=UTF-8");
     }
     private function rest_error($jsonArray) {
+        $jsonArray["status"] = "error";
         echo json_encode($jsonArray);
         $this->response->setStatusCode(400, "Bad Request");
     }
     private function rest_success($jsonArray) {
+        $jsonArray["status"] = "ok";
         echo json_encode($jsonArray);
     }
     protected function checkAuthKey($key) {
@@ -36,7 +38,6 @@ class ApiController extends ControllerBase {
                     $usertoken = Usertoken::findTokenByID($token);
                     if($usertoken) {
                         $this->rest_success(array(
-                            "status" => "OK",
                             "authdata" => unserialize($usertoken->authdata)
                         ));
                         $usertoken->delete();

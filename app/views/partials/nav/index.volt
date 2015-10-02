@@ -6,7 +6,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{this.config.application.baseUri}}"> {{i18n.site_name}} </a>
+            <a class="navbar-brand" href="{{config.application.baseUri}}"> {{config.site.i18n[i18n.locale]}} </a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-main">
             {{ navbar_element.render() }}

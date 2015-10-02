@@ -34,7 +34,7 @@ class ControllerBase extends Controller {
     protected function initialize() {
         $this->_checkSecure();
 
-        $this->tag->prependTitle($this->i18n->site_name . '::');
+        $this->tag->prependTitle($this->config->site->i18n[$this->i18n->locale] . '::');
         $this->view->setTemplateAfter('main');
 
         if($this->request->getHeader("X-PJAX") == "true") {

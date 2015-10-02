@@ -30,9 +30,9 @@
             <h1>还没有帐号？</h1>
         </div>
         <h5>立刻注册！</h5>
-        <p>在 {{i18n.site_name}} 上</p>
+        <p>在 {{config.site.i18n[i18n.locale]}} 上</p>
         <ul>
-            <li>一键登录所有 {{i18n.site_name}} 产品</li>
+            <li>一键登录所有 {{config.site.i18n[i18n.locale]}} 产品</li>
             <li>和好友以及其他用户自由交流</li>
         </ul>
         {% endif %}
@@ -41,9 +41,9 @@
             <h1>Don't have an account yet?</h1>
         </div>
         <h5>Sign up now!</h5>
-        <p>{{i18n.site_name}} enables you:</p>
+        <p>{{config.site.i18n[i18n.locale]}} enables you:</p>
         <ul>
-            <li>Log In in all products of {{i18n.site_name}}</li>
+            <li>Log In in all products of {{config.site.i18n[i18n.locale]}}</li>
             <li>And to keep in touch with your friends</li>
         </ul>
         {% endif %}

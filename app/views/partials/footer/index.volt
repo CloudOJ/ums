@@ -18,7 +18,7 @@
             </ul>
             <p>
                 {% if i18n.locale == "zh-cn" %}
-                {{i18n.site_name}} 由 μms 强力驱动。
+                {{config.site.i18n[i18n.locale]}} 由 μms 强力驱动。
                 {% endif %}
                 {% if i18n.locale == "en-us" %}
                 Powered by μms.
