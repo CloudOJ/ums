@@ -15,5 +15,6 @@ class IndexController extends ControllerBase {
         parent::initialize();
     }
     public function indexAction() {
+        echo "Hello";
     }
 }
