@@ -216,34 +216,6 @@ $di->set(
     }
 );
 
-$di->set(
-    'i18n',
-    function() use ($di){
-        $request = $di->get('request');
-        $locale = $request->getQuery("locale");
-        $session = $di->get('session');
-        if(!$locale) {
-            if($session->has('locale')) {
-                $locale = $session->get('locale');
-            } else {
-                $locale = $request->getBestLanguage();
-                $session->set('locale', $locale);
-            }
-        } else {
-            $session->set('locale', $locale);
-        }
-        $locale = strtolower($locale);
-        if ($locale == "zh-cn") {
-            return new \Ums\i18n_zh_cn();
-        } elseif ($locale == "en-us") {
-            return new \Ums\i18n_en_us();
-        } else {
-            return new \Ums\i18n_en_us();
-        }
-    },
-    true
-);
-
 $exetime = microtime(true);
 
 $di->set(

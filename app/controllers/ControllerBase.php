@@ -6,42 +6,25 @@ namespace Ums\Controllers;
 use Phalcon\Mvc\Controller;
 use Phalcon\Mvc\View;
 
+use Ums\ControllerI18nInterface;
+use Ums\ControllerSecureInterface;
+use Ums\ControllerPjaxInterface;
+use Ums\ControllerCookieInterface;
+
 class ControllerBase extends Controller {
-    protected function _processCookie() {
-        if(!$this->session->has("cookie-checked")) {
-            if(!$this->session->has("auth")) {
-                if ($this->cookies->has('remember-me')) {
-                    $rememberMe = $this->cookies->get('remember-me');
-                    $this->session->set("auth", unserialize($rememberMe->getValue()));
-                    $this->flash->notice($this->i18n->user_login_auto_success);
-                }
-            }
-            $this->session->set("cookie-checked", true);
-        }
-    }
-    protected function _checkSecure() {
-        if($this->config->application->secure) {
-            if($this->request->isSecureRequest()) {
-                return;
-            } else {
-                $response = new \Phalcon\HTTP\Response();
-                $response->redirect("https://" . $this->request->getHttpHost() . $this->request->getURI(), true);
-                $response->send();
-                exit;
-            }
-        }
-    }
+    use ControllerI18nInterface,
+        ControllerPjaxInterface,
+        ControllerSecureInterface,
+        ControllerCookieInterface;
+
     protected function initialize() {
         $this->_checkSecure();
+        $this->_processi18n();
 
         $this->tag->prependTitle($this->config->site->i18n[$this->i18n->locale] . '::');
         $this->view->setTemplateAfter('main');
 
-        if($this->request->getHeader("X-PJAX") == "true") {
-            $this->view->setRenderLevel(View::LEVEL_AFTER_TEMPLATE);
-        } else {
-            $this->view->setRenderLevel(View::LEVEL_MAIN_LAYOUT);
-        }
+        $this->_processPjax();
         $this->_processCookie();
     }
 
