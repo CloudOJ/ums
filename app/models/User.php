@@ -20,6 +20,9 @@ class User extends ModelBase {
         $this->hasOne("uid", "\Ums\Models\Userprofile", "uid", array(
             'alias' => 'Userprofile'
         ));
+        $this->hasOne("uid", "\Ums\Models\Useroption", "uid", array(
+            'alias' => 'Useroption'
+        ));
     }
     public function validation() {
         $this->validate(new UniquenessValidator(array(

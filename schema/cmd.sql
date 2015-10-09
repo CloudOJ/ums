@@ -35,8 +35,6 @@ CREATE TABLE `userlog` (
     INDEX log(uid, type)
 ) DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-# Update
-
 # ------------------
 # Create Token Table
 # ------------------
@@ -46,4 +44,16 @@ CREATE TABLE `usertoken` (
     PRIMARY KEY (tokenid),
     authdata BLOB,
     expire_at DATETIME
+) DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+# ------------------
+# Create Option Table
+# ------------------
+
+CREATE TABLE `useroption` (
+    uid int(11) NOT null,
+    type int(11) NOT null,
+    detail text NOT null,
+    PRIMARY KEY (uid),
+    UNIQUE useropt(uid, type)
 ) DEFAULT CHARSET = utf8mb4 COLLATE utf8mb4_unicode_ci;

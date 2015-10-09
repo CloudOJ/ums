@@ -7,23 +7,32 @@ use Phalcon\Logger\Adapter\File as Logger;
 
 error_reporting(E_ALL);
 
-$debug = new \Phalcon\Debug();
-$debug->listen();
-
 if (!isset($_GET['_url'])) {
     $_GET['_url'] = '/';
 }
+
+$debug = new \Phalcon\Debug();
+$debug->listen();
 
 define('APP_PATH', realpath('..'));
 
 require APP_PATH . "/vendor/autoload.php";
 
-$di = new FactoryDefault();
+try {
+    $di = new FactoryDefault();
 
-$config = include APP_PATH . "/app/config/config.php";
-require APP_PATH . "/app/config/loader.php";
-require APP_PATH . "/app/config/services.php";
+    $config = include APP_PATH . "/app/config/config.php";
+    require APP_PATH . "/app/config/loader.php";
+    require APP_PATH . "/app/config/services.php";
 
-$application = new Application($di);
+    $application = new Application($di);
 
-echo $application->handle()->getContent();
+    echo $application->handle()->getContent();
+} catch (Exception $e) {
+    $logger = new Logger(APP_PATH . '/app/logs/error.log');
+    $logger->error($e->getMessage());
+    $logger->error($e->getTraceAsString());
+    $response = new Response();
+    $response->redirect('/505.html');
+    $response->send();
+}
