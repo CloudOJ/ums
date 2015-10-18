@@ -11,8 +11,8 @@ use Ums\i18n;
 
 class HelpController extends ControllerBase {
     public function initialize() {
-        $this->tag->setTitle($this->i18n->title_help);
         parent::initialize();
+        $this->tag->prependTitle($this->i18n->title_help);
     }
     public function indexAction($filename = null) {
         return $this->forward("help/view");

@@ -11,8 +11,8 @@ use Ums\i18n;
 
 class IndexController extends ControllerBase {
     public function initialize() {
-        $this->tag->setTitle($this->i18n->title_welcome);
         parent::initialize();
+        $this->tag->prependTitle($this->i18n->title_welcome);
     }
     public function indexAction() {
         echo "Hello";

@@ -21,7 +21,8 @@ class ControllerBase extends Controller {
         $this->_checkSecure();
         $this->_processi18n();
 
-        $this->tag->prependTitle($this->config->site->i18n[$this->i18n->locale] . '::');
+        $this->tag->setTitle(" - " . $this->config->site->i18n[$this->i18n->locale]);
+
         $this->view->setTemplateAfter('main');
 
         $this->_processPjax();

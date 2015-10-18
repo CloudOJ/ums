@@ -15,8 +15,8 @@ use Ums\Models\Usertoken;
 
 class UserController extends ControllerBase {
     public function initialize() {
-        $this->tag->setTitle($this->i18n->title_user);
         parent::initialize();
+        $this->tag->prependTitle($this->i18n->title_user);
     }
 
     private function _registerSession(User $user) {
