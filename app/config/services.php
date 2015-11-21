@@ -17,6 +17,22 @@ use Phalcon\Cache\Frontend\Output as FrontendOutput;
 use Phalcon\Crypt;
 use Phalcon\Http\Response\Cookies;
 
+$di->set('redis', function() use ($config) {
+        if($config->redis->enabled) {
+            $redis = new Redis();
+            if($config->redis->unixsocket) {
+                $redis->connect($config->redis->unixsocket);
+            } else {
+                $redis->connect($config->redis->host, $config->redis->port);
+            }
+            return $redis;
+        } else {
+            return null;
+        }
+    },
+    true
+);
+
 $di->set('crypt', function () use ($config) {
     $crypt = new Crypt();
     $crypt->setKey($config->application->crypt->key);

@@ -9,13 +9,11 @@ use Phalcon\Mvc\View;
 use Ums\ControllerI18nInterface;
 use Ums\ControllerSecureInterface;
 use Ums\ControllerPjaxInterface;
-use Ums\ControllerCookieInterface;
 
 class ControllerBase extends Controller {
     use ControllerI18nInterface,
         ControllerPjaxInterface,
-        ControllerSecureInterface,
-        ControllerCookieInterface;
+        ControllerSecureInterface;
 
     protected function initialize() {
         $this->_checkSecure();
@@ -26,7 +24,6 @@ class ControllerBase extends Controller {
         $this->view->setTemplateAfter('main');
 
         $this->_processPjax();
-        $this->_processCookie();
     }
 
     protected function forward($uri) {

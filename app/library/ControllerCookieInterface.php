@@ -9,9 +9,11 @@ trait ControllerCookieInterface {
                     $rememberMe = $this->cookies->get('remember-me');
                     $this->session->set("auth", unserialize($rememberMe->getValue()));
                     $this->flash->notice($this->i18n->user_login_auto_success);
+                    return true;
                 }
             }
             $this->session->set("cookie-checked", true);
         }
+        return false;
     }
 }

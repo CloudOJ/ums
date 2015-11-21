@@ -15,6 +15,5 @@ class IndexController extends ControllerBase {
         $this->tag->prependTitle($this->i18n->title_welcome);
     }
     public function indexAction() {
-        echo "Hello";
     }
 }

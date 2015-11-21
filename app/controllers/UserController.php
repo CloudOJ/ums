@@ -13,7 +13,11 @@ use Ums\Models\User;
 use Ums\Models\Userprofile;
 use Ums\Models\Usertoken;
 
+use Ums\ControllerCookieInterface;
+
 class UserController extends ControllerBase {
+    use ControllerCookieInterface;
+
     public function initialize() {
         parent::initialize();
         $this->tag->prependTitle($this->i18n->title_user);
@@ -36,7 +40,7 @@ class UserController extends ControllerBase {
                     $this->flash->error((string) $message);
                 }
             } else {
-                $ret .= sprintf("$.ajax({url:\"%s/saveAuth/%s/%s\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri, $token->tokenid, strval($remember));
+                $ret .= sprintf("$.ajax({type: 'POST',url:\"%s/saveAuth/%s/%s/\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri, $token->tokenid, ($remember == false ? "false" : "true"));
             }
         }
         $ret .= "</script>";
@@ -45,7 +49,7 @@ class UserController extends ControllerBase {
     protected function getSyncLogout() {
         $ret = "<script>";
         foreach ($this->config->ums as $site) {
-            $ret .= sprintf("$.ajax({url:\"%s/removeAuth/\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri);
+            $ret .= sprintf("$.ajax({type: 'POST',url:\"%s/removeAuth/\",xhrFields:{withCredentials:true},crossDomain:true});", $site->umsUri);
         }
         $ret .= "</script>";
         return $ret;
@@ -53,9 +57,14 @@ class UserController extends ControllerBase {
     protected function isLoggedin() {
         return $this->session->has('auth');
     }
-    public function loginAction() {
+    public function loginAction($appId = 0) {
+        if($this->_processCookie()) return $this->forward("index/index");
         if($this->isLoggedin()) {
             $this->flash->error($this->i18n->user_alreadyloggedin);
+            if($appId != 0) {
+                $ums = $this->config->ums;
+                return $this->response->redirect($ums[$appId - 1]->umsUri . "/redirect/");
+            }
             return $this->forward("index/index");
         }
         $form = new LoginForm();

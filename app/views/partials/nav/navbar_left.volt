@@ -6,7 +6,7 @@
         </span>
     </a></li>
     {% for umssite in config.ums %}
-    <li><a href="{{umssite.baseUri}}">
+    <li><a href="{{umssite.umsUri}}/redirect">
         {{glyphicon("chevron-left")}}
         <span>{{i18n.navbar_return}} {{umssite.i18n[i18n.locale]}}</span>
     </a></li>
