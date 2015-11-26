@@ -6,9 +6,15 @@
         </span>
     </a></li>
     {% for umssite in config.ums %}
-    <li><a href="{{umssite.umsUri}}/redirect">
+    <li>
+        {% if session.has("auth") %}
+        <a href="{{url('/user/token/')}}/{{umssite.id}}">
+        {% else %}
+        <a href="{{umssite.baseUri}}">
+        {% endif %}
         {{glyphicon("chevron-left")}}
         <span>{{i18n.navbar_return}} {{umssite.i18n[i18n.locale]}}</span>
-    </a></li>
+        </a>
+    </li>
     {% endfor %}
 </ul>
